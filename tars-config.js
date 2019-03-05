@@ -28,10 +28,10 @@ module.exports = {
     svg: {
         active: true,
         // symbols, sprite
-        workflow: 'sprite',
+        workflow: 'symbols',
         symbolsConfig: {
             // separate-file, separate-file-with-link, inject
-            loadingType: 'inject',
+            loadingType: 'separate-file-with-link',
             usePolyfillForExternalSymbols: true,
             pathToExternalSymbolsFile: ''
         }
@@ -44,7 +44,7 @@ module.exports = {
 
     js: {
         // concat, modular
-        workflow: 'concat',
+        workflow: 'modular',
 
         // Only webpack is available right now
         bundler: 'webpack',
@@ -193,7 +193,7 @@ module.exports = {
      * The slash after the name should stand
      * @type {String}
      */
-    devPath: './dev/',
+    devPath: './build/',
 
     /**
      * Path to build version of project
@@ -201,20 +201,20 @@ module.exports = {
      * The slash after the name should stand
      * @type {String}
      */
-    buildPath: './builds/',
+    buildPath: './build/',
 
     /**
      * Use build versioning
      * Build version is a date ot building
      * @type {Boolean}
      */
-    useBuildVersioning: true,
+    useBuildVersioning: false,
 
     /**
      * Use archiver for your build
      * @type {Boolean}
      */
-    useArchiver: true,
+    useArchiver: false,
 
     /**
      * Set ulimit. Topical for Linux-family OS and OSX.
@@ -236,7 +236,7 @@ module.exports = {
      * Available 'pug', 'jade' and 'handlebars'
      * @type {String}
      */
-    templater: 'handlebars',
+    templater: 'pug',
 
     /**
      * Css-preprocessor
