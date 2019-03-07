@@ -21,7 +21,7 @@ function dataFileProcessing(content) {
 module.exports = function pagesAndDataFilesProcessing() {
     let hrefArray = [];
     let pageNameArray = [];
-
+    let pageDscArr = [];
     return through2.obj(function (file, enc, callback) {
         const parsedFileRelativePath = path.parse(file.relative);
         const fileName = parsedFileRelativePath.base;
@@ -55,7 +55,10 @@ module.exports = function pagesAndDataFilesProcessing() {
                 if (parsedFileRelativePath.dir) {
                     parsedFileRelativePath.dir += '/';
                 }
+                let commentLength = fileContent.indexOf(`
+`)
 
+                pageDscArr.push(fileContent.substring(3,commentLength))
                 hrefArray.push(`${parsedFileRelativePath.dir}${parsedFileRelativePath.name}.html`);
                 pageNameArray.push(parsedFileRelativePath.dir + parsedFileRelativePath.name);
                 break;
@@ -70,9 +73,12 @@ module.exports = function pagesAndDataFilesProcessing() {
                 pagesListFileContent += ',';
             }
 
+
+
             pagesListFileContent += `{
                 name: '${pageNameArray[index]}',
-                href: '${value}'
+                href: '${value}',
+                desc: '${pageDscArr[index]}',
              }`;
         });
         pagesListFileContent += ']';
